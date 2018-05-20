@@ -10,25 +10,28 @@
   <div id="detail">
     <Form :model="form" :label-width="80">
       <FormItem label="ID:">
-        {{form.id}}
-      </FormItem>
-      <FormItem label="头像:">
-        <img :src="form.avatar" style="max-height: 240px">
+        {{form.ID}}
       </FormItem>
       <FormItem label="标题:">
-        {{form.title}}
+        {{form.Title}}
       </FormItem>
-      <FormItem label="标签:">
-        {{form.tag}}
+      <FormItem label="日期:">
+        {{form.Date}}
       </FormItem>
-      <FormItem label="来源:">
-        {{form.from}}
+      <FormItem label="作者:">
+        {{form.Name}}
       </FormItem>
       <FormItem label="内容:">
-        <div v-html="form.content"></div>
+        <div v-html="form.Content"></div>
       </FormItem>
-      <FormItem label="概览:">
-        {{form.preview}}
+      <FormItem label="是否展示:">
+        {{form.Exhibition === 0 ? '不展示' : '展示'}}
+      </FormItem>
+      <FormItem label="备注:">
+        {{form.Ps}}
+      </FormItem>
+      <FormItem label="类型:">
+        {{form.Type === 1 ? '自己文章':'转载文章'}}
       </FormItem>
     </Form>
   </div>
@@ -41,13 +44,14 @@
       return {
         getID: '',
         form: {
-          id: 0,
-          avatar: '',
-          title: '',
-          tag: '',
-          content: '',
-          from: '',
-          preview: ''
+          Id: 0,
+          Title: '',
+          Date: '',
+          Name: '',
+          Content: '',
+          Exhibition: '',
+          Ps: '',
+          Type: ''
         },
         isLoading: false,
         visible: false,
@@ -69,13 +73,14 @@
           let res = response.data
           if (res.status === 10000) {
             this.form = {
-              id: res.article.ID,
-              avatar: res.article.Avatar,
-              title: res.article.Title,
-              tag: res.article.TagStr,
-              content: res.article.Content,
-              from: res.article.From,
-              preview: res.article.Preview
+              Id: res.article.Id,
+              Title: res.article.Title,
+              Date: res.article.Date,
+              Name: res.article.Name,
+              Content: res.article.Content,
+              Exhibition: res.article.Exhibition,
+              Ps: res.article.Ps,
+              Type: res.article.Type
             }
           } else {
             this.$Message.error('获取失败，请稍候再试')

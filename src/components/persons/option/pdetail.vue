@@ -10,19 +10,19 @@
   <div id="detail">
     <Form :model="form" :label-width="80">
       <FormItem label="ID:">
-        {{form.id}}
-      </FormItem>
-      <FormItem label="头像:">
-        <img :src="form.avatar" style="max-height: 240px">
+        {{form.ID}}
       </FormItem>
       <FormItem label="名字:">
-        {{form.name}}
+        {{form.Name}}
       </FormItem>
-      <FormItem label="简介:">
-        {{form.introduce}}
+      <FormItem label="时间:">
+        {{form.Time}}
+      </FormItem>
+      <FormItem label="删除:">
+        {{form.Delete === 1 ? '不展示' : '展示'}}
       </FormItem>
       <FormItem label="内容:">
-        <div v-html="form.contents"></div>
+        <div v-html="form.Content"></div>
       </FormItem>
     </Form>
   </div>
@@ -35,11 +35,11 @@
       return {
         getID: '',
         form: {
-          id: 0,
-          avatar: '',
-          name: '',
-          introduce: '',
-          contents: ''
+          ID: 0,
+          Name: '',
+          Time: '',
+          Delete: '',
+          Content: ''
         },
         isLoading: false,
         visible: false,
@@ -61,11 +61,11 @@
           let res = response.data
           if (res.status === 10000) {
             this.form = {
-              id: res.introduction.ID,
-              avatar: res.introduction.Avatar,
-              name: res.introduction.Name,
-              contents: res.introduction.Contents,
-              introduce: res.introduction.Introduce
+              ID: res.introduction.ID,
+              Name: res.introduction.Name,
+              Time: res.introduction.Time,
+              Delete: res.introduction.Delete,
+              Content: res.introduction.Content
             }
           } else {
             this.$Message.error('获取失败，请稍候再试')

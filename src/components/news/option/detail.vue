@@ -10,25 +10,19 @@
   <div id="detail">
     <Form :model="form" :label-width="80">
       <FormItem label="ID:">
-        {{form.id}}
-      </FormItem>
-      <FormItem label="头像:">
-        <img :src="form.avatar" style="max-height: 240px">
+        {{form.ID}}
       </FormItem>
       <FormItem label="标题:">
-        {{form.title}}
+        {{form.Title}}
       </FormItem>
-      <FormItem label="作者:">
-        {{form.author}}
+      <FormItem label="时间:">
+        {{form.Time}}
       </FormItem>
-      <FormItem label="访问人数:">
-        {{form.visitors}}
+      <FormItem label="是否删除:">
+        {{form.Delete === 1 ? '不展示' : '展示'}}
       </FormItem>
       <FormItem label="内容:">
-        <div v-html="form.contents"></div>
-      </FormItem>
-      <FormItem label="概览:">
-        {{form.preview}}
+        <div v-html="form.Content"></div>
       </FormItem>
     </Form>
   </div>
@@ -41,13 +35,11 @@
       return {
         getID: '',
         form: {
-          id: 0,
-          avatar: '',
-          title: '',
-          tag: '',
-          contents: '',
-          from: '',
-          preview: ''
+          ID: 0,
+          Title: '',
+          Content: '',
+          Time: '',
+          Delete: ''
         },
         isLoading: false,
         visible: false,
@@ -69,13 +61,11 @@
           let res = response.data
           if (res.status === 10000) {
             this.form = {
-              id: res.news.ID,
-              avatar: res.news.Avatar,
-              title: res.news.Title,
-              author: res.news.Author,
-              contents: res.news.Contents,
-              visitors: res.news.Visitors,
-              preview: res.news.Preview
+              ID: res.news.ID,
+              Title: res.news.Title,
+              Content: res.news.Content,
+              Time: res.news.Time,
+              Delete: res.news.Delete
             }
           } else {
             this.$Message.error('获取失败，请稍候再试')

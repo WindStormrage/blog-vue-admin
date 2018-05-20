@@ -18,7 +18,7 @@
     .login .logo
       margin-left -10px
       width 220px
-      height:auto;
+      height: auto;
 
     .login .form
       display flex

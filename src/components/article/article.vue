@@ -55,50 +55,28 @@
             key: 'ID'
           },
           {
-            title: '头像',
-            key: 'Avatar',
-            render: (h,params) =>{
-              let a = params.row.Avatar;
-              return h('img',{
-                attrs:{
-                  src:a,
-                  style: "max-height: 80px;"
-                }
-              })
-            }
-          },
-          {
             title: '标题',
             key: 'Title'
           },
           {
-            title: '标签',
-            key: 'TagStr'
+            title: '日期',
+            key: 'Date'
           },
           {
-            title: '来源',
-            key: 'From'
-            // render: (h, params) => {
-            //   let status = params.row.Language
-            //   let state = '未知'
-            //   if (status === 'zh-CN') {
-            //     state = '简体中文'
-            //   }
-            //   if (status === 'en-US') {
-            //     state = '英文'
-            //   }
-            //   return h('div', [
-            //     h('Span', {
-            //       props: {
-            //         type: 'text'
-            //       }
-            //     }, state)
-            //   ])
-            // }
+            title: '作者',
+            key: 'Name'
           },
           {
-            title: '概览',
-            key: 'Preview'
+            title: '备注',
+            key: 'Ps'
+          },
+          {
+            title: '是否展示',
+            key: 'Exhibition'
+          },
+          {
+            title: '类型',
+            key: 'Type'
           },
           {
             title: '操作',

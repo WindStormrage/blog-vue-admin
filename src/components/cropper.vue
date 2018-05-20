@@ -43,7 +43,7 @@
        * [param] imgDataUrl
        * [param] field
        */
-      cropSuccess(imgDataUrl, field){
+      cropSuccess(imgDataUrl, field) {
         console.log('-------- crop success --------');
         this.imgDataUrl = imgDataUrl;
       },
@@ -53,7 +53,7 @@
        * [param] jsonData   服务器返回数据，已进行json转码
        * [param] field
        */
-      cropUploadSuccess(jsonData, field){
+      cropUploadSuccess(jsonData, field) {
         console.log('-------- upload success --------');
         console.log(jsonData);
         console.log('field: ' + field);
@@ -64,7 +64,7 @@
        * [param] status    server api return error status, like 500
        * [param] field
        */
-      cropUploadFail(status, field){
+      cropUploadFail(status, field) {
         console.log('-------- upload fail --------');
         console.log(status);
         console.log('field: ' + field);

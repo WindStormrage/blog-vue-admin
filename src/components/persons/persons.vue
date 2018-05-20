@@ -46,31 +46,20 @@
             key: 'ID'
           },
           {
-            title: '头像',
-            key: 'Avatar',
-            render: (h,params) =>{
-              let a = params.row.Avatar;
-              console.log(a);
-              return h('img',{
-                attrs:{
-                  src:a,
-                  style: "max-height: 80px;"
-                }
-              })
-            }
-          },
-          {
             title: '名字',
             key: 'Name'
           },
           {
-            title: '简介',
-            key: 'Introduce'
+            title: '时间',
+            key: 'Time'
           },
           {
             title: '内容',
-            key: 'Contents',
-            type: 'html'
+            key: 'Content'
+          },
+          {
+            title: '删除',
+            key: 'Delete'
           },
           {
             title: '操作',

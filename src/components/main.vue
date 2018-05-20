@@ -49,8 +49,9 @@
       text-align: center
       padding: 10px 0 20px
       color: #9ea7b4
+
   .ivu-menu-submenu-title
-     display none
+    display none
 
 </style>
 
@@ -75,9 +76,11 @@
                 <template slot="title">
                   <Icon type="film-marker"></Icon>
                 </template>
-                <MenuItem name="1-1">健康文章管理</MenuItem>
-                <MenuItem name="1-2">人物管理</MenuItem>
-                <MenuItem name="1-3">新闻管理</MenuItem>
+                <MenuItem name="1-1">文章管理</MenuItem>
+                <MenuItem name="1-2">留言管理</MenuItem>
+                <MenuItem name="1-3">随笔管理</MenuItem>
+                <MenuItem name="1-4">配置管理</MenuItem>
+                <MenuItem name="1-5">图片上传</MenuItem>
               </Submenu>
             </Menu>
           </i-Col>
@@ -89,7 +92,7 @@
         </Row>
       </div>
       <div class="main-layout-copy">
-        2017 &copy; 湖南易正网络科技有限公司
+        2018 &copy; 谢大帅哥的个人博客后台管理系统
       </div>
     </div>
   </div>
@@ -98,33 +101,41 @@
 
 <script>
   export default {
-    data () {
+    data() {
       return {
         active: '1',
         nav: {
           '1-1': {
             path: '/admin/main/article',
-            title: '健康文章管理'
+            title: '文章管理'
           },
           '1-2': {
             path: '/admin/main/person',
-            title: '人物管理'
+            title: '留言管理'
           },
           '1-3': {
             path: '/admin/main/news',
-            title: '新闻管理'
+            title: '随笔管理'
+          },
+          '1-4': {
+            path: '/admin/main/config',
+            title: '配置管理'
+          },
+          '1-5': {
+            path: '/admin/main/upload',
+            title: '图片上传'
           }
         }
       }
     },
     methods: {
-      menuSelect (name) {
+      menuSelect(name) {
         this.$router.push({
           path: this.nav['' + name + ''].path
         })
         document.title = this.nav['' + name + ''].title
       },
-      logout () {
+      logout() {
         this.$http.post('/api/admin/logout').then((response) => {
           if (response.data.status === 10000) {
             this.$Message.success('退出成功')

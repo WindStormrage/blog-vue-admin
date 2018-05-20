@@ -55,50 +55,20 @@
             key: 'ID'
           },
           {
-            title: '头像',
-            key: 'Avatar',
-            render: (h,params) =>{
-              let a = params.row.Avatar;
-              return h('img',{
-                attrs:{
-                  src:a,
-                  style: "max-height: 80px;"
-                }
-              })
-            }
-          },
-          {
             title: '标题',
             key: 'Title'
           },
           {
-            title: '作者',
-            key: 'Author'
+            title: '内容',
+            key: 'Content'
           },
           {
-            title: '访问人数',
-            key: 'Visitors'
-            // render: (h, params) => {
-            //   let status = params.row.Language
-            //   let state = '未知'
-            //   if (status === 'zh-CN') {
-            //     state = '简体中文'
-            //   }
-            //   if (status === 'en-US') {
-            //     state = '英文'
-            //   }
-            //   return h('div', [
-            //     h('Span', {
-            //       props: {
-            //         type: 'text'
-            //       }
-            //     }, state)
-            //   ])
-            // }
+            title: '时间',
+            key: 'Time'
           },
           {
-            title: '概览',
-            key: 'Preview'
+            title: '是否删除',
+            key: 'Delete'
           },
           {
             title: '操作',
@@ -200,7 +170,7 @@
         this.$http.post('/api/admin/news/list', qs.stringify(
           this.query
         )).then((response) => {
-          let res = response.data;
+          let res = response.data
           console.log(res)
           if (res.status === 10000) {
             this.articles = res.news

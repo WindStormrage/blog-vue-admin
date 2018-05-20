@@ -11,6 +11,8 @@ import pdetail from '@/components/persons/option/pdetail'
 import news from '@/components/news/news'
 import nsave from '@/components/news/option/save'
 import ndetail from '@/components/news/option/detail'
+import config from '@/components/config/config'
+import upload from '@/components/upload/upload'
 
 import test from '@/components/cropper'
 
@@ -68,6 +70,14 @@ export default new Router({
         {
           path: '/admin/main/news/detail',
           component: ndetail
+        },
+        {
+          path: '/admin/main/config',
+          component: config
+        },
+        {
+          path: '/admin/main/upload',
+          component: upload
         }
       ]
     }

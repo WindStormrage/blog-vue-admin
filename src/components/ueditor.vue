@@ -35,7 +35,7 @@
       getContent() {
         return this.editor.getContent()
       },
-      getPlainTxt () {
+      getPlainTxt() {
         return this.editor.getPlainTxt()
       },
       cleanContent() {
@@ -59,7 +59,7 @@
           if (this.value2) {
             this.editor.setContent(this.value2)
           }
-          this.editor.addListener("contentChange", function() {
+          this.editor.addListener("contentChange", function () {
             const wordCount = this.editor.getContentLength(true)
             const content = this.editor.getContent()
             const plainTxt = this.editor.getPlainTxt()
