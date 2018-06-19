@@ -9,8 +9,8 @@
 <template>
   <div id="detail">
     <Form :model="form" :label-width="80">
-      <FormItem label="ID:">
-        {{form.ID}}
+      <FormItem label="Id:">
+        {{form.Id}}
       </FormItem>
       <FormItem label="名字:">
         {{form.Name}}
@@ -35,7 +35,7 @@
       return {
         getID: '',
         form: {
-          ID: 0,
+          Id: 0,
           Name: '',
           Time: '',
           Delete: '',
@@ -57,15 +57,15 @@
     },
     methods: {
       getDetail() {
-        this.$http.post('/api/admin/person/detail?id=' + this.getID).then((response) => {
+        this.$http.post('/api/admin/comment/detail?id=' + this.getID).then((response) => {
           let res = response.data
           if (res.status === 10000) {
             this.form = {
-              ID: res.introduction.ID,
-              Name: res.introduction.Name,
-              Time: res.introduction.Time,
-              Delete: res.introduction.Delete,
-              Content: res.introduction.Content
+              Id: res.comment.Id,
+              Name: res.comment.Name,
+              Time: res.comment.Time,
+              Delete: res.comment.Delete,
+              Content: res.comment.ContentDetail
             }
           } else {
             this.$Message.error('获取失败，请稍候再试')

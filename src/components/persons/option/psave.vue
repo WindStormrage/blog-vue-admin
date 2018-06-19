@@ -40,7 +40,7 @@
         getID: '',
         isEdit: false,
         form: {
-          ID: 0,
+          Id: 0,
           Name: '',
           Time: '',
           Delete: '',
@@ -64,11 +64,11 @@
     },
     methods: {
       getDetail () {
-        this.$http.post('/api/admin/person/detail?id=' + this.getID).then((response) => {
+        this.$http.post('/api/admin/comment/detail?id=' + this.getID).then((response) => {
           let res = response.data
           if (res.status === 10000) {
             this.form = {
-              ID: res.introduction.ID,
+              Id: res.introduction.Id,
               Name: res.introduction.Name,
               Time: res.introduction.Time,
               Delete: res.introduction.Delete,
@@ -89,16 +89,16 @@
           return
         }
 //        this.$ShowLoading()
-        this.$http.post('/api/admin/person/save', qs.stringify(this.form)).then((response) => {
+        this.$http.post('/api/admin/comment/save', qs.stringify(this.form)).then((response) => {
           let res = response.data
           if (res.status === 10001) {
             this.$Message.error('对应人物描述不存在')
           } else if (res.status === 10000) {
             this.$Message.success('保存成功')
-            this.$router.push({path: '/admin/main/person'})
+            this.$router.push({path: '/admin/main/comment'})
             this.$emit('refresh')
             this.form = {
-              ID: 0,
+              Id: 0,
               Name: '',
               Time: '',
               Delete: '',

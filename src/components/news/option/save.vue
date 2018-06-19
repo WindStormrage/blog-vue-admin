@@ -12,7 +12,7 @@
         <Input v-model="form.Time" placeholder="2018-5-20 00:00:00"/>
       </FormItem>
       <FormItem label="内容">
-        <ueditor :value="form.Content" :config="config" ref="ueditor"></ueditor>
+        <ueditor :value="form.ContentDetail" :config="config" ref="ueditor"></ueditor>
       </FormItem>
       <FormItem label="删除">
         <Input v-model="form.Delete" placeholder="0 or 1"/>
@@ -42,9 +42,9 @@
         isEdit: false,
         languages: [],
         form: {
-          ID: 0,
+          Id: 0,
           Title: '',
-          Content: '',
+          ContentDetail: '',
           Time: '',
           Delete: ''
         },
@@ -66,15 +66,15 @@
     },
     methods: {
       getDetail() {
-        this.$http.post('/api/admin/news/detail?id=' + this.getID).then((response) => {
+        this.$http.post('/api/admin/axis/detail?id=' + this.getID).then((response) => {
           let res = response.data
           if (res.status === 10000) {
             this.form = {
-              ID: res.news.ID,
-              Title: res.news.Title,
-              Content: res.news.Content,
-              Time: res.news.Time,
-              Delete: res.news.Delete
+              Id: res.axis.Id,
+              Title: res.axis.Title,
+              ContentDetail: res.axis.ContentDetail,
+              Time: res.axis.Time,
+              Delete: res.axis.Delete
             }
           } else {
             this.$Message.error('获取失败，请稍候再试')
@@ -84,9 +84,9 @@
         })
       },
       submit() {
-        this.form.Content = this.$refs.ueditor.getContent()
+        this.form.ContentDetail = this.$refs.ueditor.getContent()
         console.log(this.form)
-        if (!this.form.Title || !this.form.Content || !this.form.Time || !this.form.Delete) {
+        if (!this.form.Title || !this.form.ContentDetail || !this.form.Time || this.form.Delete === '') {
           this.$Message.error('内容填写不完整')
           return
         }
@@ -94,7 +94,7 @@
           this.form.language = '通用'
         }
 //        this.$ShowLoading()
-        this.$http.post('/api/admin/news/save', qs.stringify(this.form)).then((response) => {
+        this.$http.post('/api/admin/axis/save', qs.stringify(this.form)).then((response) => {
           let res = response.data
           if (res.status === 10001) {
             this.$Message.error('对应文章不存在')
@@ -103,9 +103,9 @@
             this.$router.push({path: '/admin/main/news'})
             this.$emit('refresh')
             this.form = {
-              ID: 0,
+              Id: 0,
               Title: '',
-              Content: '',
+              ContentDetail: '',
               Time: '',
               Delete: ''
             }

@@ -14,7 +14,8 @@ import ndetail from '@/components/news/option/detail'
 import config from '@/components/config/config'
 import upload from '@/components/upload/upload'
 
-import test from '@/components/cropper'
+//import test from '@/components/cropper'
+import test from '@/components/doTest'
 
 Vue.use(Router)
 

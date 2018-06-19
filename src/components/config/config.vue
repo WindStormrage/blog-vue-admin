@@ -9,45 +9,45 @@
         <Input v-model="form.Name" placeholder="请输入"/>
       </FormItem>
       <FormItem label="头像">
-        <Button type="ghost" icon="ios-cloud-upload-outline" @click="toggleShow">上传图片</Button>
-        <my-upload field="file"
-                   @crop-success="cropSuccess"
-                   @crop-upload-success="cropUploadSuccess1"
-                   @crop-upload-fail="cropUploadFail"
-                   v-model="show"
-                   :width="360"
-                   :height="360"
-                   url="/api/admin/file/upload"
-                   noCircle="true"
-                   img-format="png"></my-upload>
+        <!--<Button type="ghost" icon="ios-cloud-upload-outline" @click="toggleShow">上传图片</Button>-->
+        <!--<my-upload field="file"-->
+                   <!--@crop-success="cropSuccess"-->
+                   <!--@crop-upload-success="cropUploadSuccess1"-->
+                   <!--@crop-upload-fail="cropUploadFail"-->
+                   <!--v-model="show"-->
+                   <!--:width="360"-->
+                   <!--:height="360"-->
+                   <!--url="/api/admin/file/upload"-->
+                   <!--noCircle="true"-->
+                   <!--img-format="png"></my-upload>-->
         <img :src="form.Header" style="max-height: 240px">
       </FormItem>
       <FormItem label="banner图">
-        <Button type="ghost" icon="ios-cloud-upload-outline" @click="toggleShow">上传图片</Button>
-        <my-upload field="file"
-                   @crop-success="cropSuccess"
-                   @crop-upload-success="cropUploadSuccess2"
-                   @crop-upload-fail="cropUploadFail"
-                   v-model="show"
-                   :width="1127"
-                   :height="290"
-                   url="/api/admin/file/upload"
-                   noCircle="true"
-                   img-format="png"></my-upload>
+        <!--<Button type="ghost" icon="ios-cloud-upload-outline" @click="toggleShow">上传图片</Button>-->
+        <!--<my-upload field="file"-->
+                   <!--@crop-success="cropSuccess"-->
+                   <!--@crop-upload-success="cropUploadSuccess2"-->
+                   <!--@crop-upload-fail="cropUploadFail"-->
+                   <!--v-model="show"-->
+                   <!--:width="1127"-->
+                   <!--:height="290"-->
+                   <!--url="/api/admin/file/upload"-->
+                   <!--noCircle="true"-->
+                   <!--img-format="png"></my-upload>-->
         <img :src="form.Banner" style="max-height: 240px">
       </FormItem>
       <FormItem label="logo">
-        <Button type="ghost" icon="ios-cloud-upload-outline" @click="toggleShow">上传图片</Button>
-        <my-upload field="file"
-                   @crop-success="cropSuccess"
-                   @crop-upload-success="cropUploadSuccess3"
-                   @crop-upload-fail="cropUploadFail"
-                   v-model="show"
-                   :width="1150"
-                   :height="289"
-                   url="/api/admin/file/upload"
-                   noCircle="true"
-                   img-format="png"></my-upload>
+        <!--<Button type="ghost" icon="ios-cloud-upload-outline" @click="toggleShow">上传图片</Button>-->
+        <!--<my-upload field="file"-->
+                   <!--@crop-success="cropSuccess"-->
+                   <!--@crop-upload-success="cropUploadSuccess3"-->
+                   <!--@crop-upload-fail="cropUploadFail"-->
+                   <!--v-model="show"-->
+                   <!--:width="1150"-->
+                   <!--:height="289"-->
+                   <!--url="/api/admin/file/upload"-->
+                   <!--noCircle="true"-->
+                   <!--img-format="png"></my-upload>-->
         <img :src="form.Logo" style="max-height: 240px">
       </FormItem>
       <FormItem label="信息">
@@ -99,15 +99,15 @@
     },
     methods: {
       getDetail () {
-        this.$http.post('/api/admin/config/config').then((response) => {
+        this.$http.post('/api/admin/conf/list').then((response) => {
           let res = response.data
           if (res.status === 10000) {
             this.form = {
-              Name: res.news.Name,
-              Header: res.news.Header,
-              Banner: res.news.Banner,
-              Logo: res.news.Logo,
-              Msg: res.news.Msg
+              Name: res.confs[0].Name,
+              Header: 'http://www.xiedashuaige.cn:3000/' + res.confs[0].Header,
+              Banner: 'http://www.xiedashuaige.cn:3000/' + res.confs[0].Banner,
+              Logo: 'http://www.xiedashuaige.cn:3000/' + res.confs[0].Logo,
+              Msg: res.confs[0].Msg
             }
           } else {
             this.$Message.error('获取失败，请稍候再试')
@@ -117,6 +117,9 @@
         })
       },
       submit () {
+        this.form.Header = this.form.Header.split('http://www.xiedashuaige.cn:3000/')[1]
+        this.form.Banner = this.form.Banner.split('http://www.xiedashuaige.cn:3000/')[1]
+        this.form.Logo = this.form.Logo.split('http://www.xiedashuaige.cn:3000/')[1]
         console.log(this.form)
         if (!this.form.Name || !this.form.Header || !this.form.Banner || !this.form.Logo || !this.form.Msg) {
           this.$Message.error('内容填写不完整')
@@ -126,7 +129,7 @@
           this.form.language = '通用'
         }
 //        this.$ShowLoading()
-        this.$http.post('/api/admin/news/save', qs.stringify(this.form)).then((response) => {
+        this.$http.post('/api/admin/conf/save', qs.stringify(this.form)).then((response) => {
           let res = response.data
           if (res.status === 10001) {
             this.$Message.error('对应文章不存在')
@@ -176,7 +179,7 @@
         console.log(jsonData)
         console.log('field: ' + field)
         if (jsonData.status === 10000) {
-          this.form.Header = 'https://www.puzhengyuan.com' + jsonData.filepath
+          this.form.Header = 'http://123.207.39.128:8080' + jsonData.filepath
           this.$Message.success('上传成功')
         } else {
           this.$Message.error('上传失败,请重试')
@@ -187,7 +190,7 @@
         console.log(jsonData)
         console.log('field: ' + field)
         if (jsonData.status === 10000) {
-          this.form.Banner = 'https://www.puzhengyuan.com' + jsonData.filepath
+          this.form.Banner = 'http://123.207.39.128:8080' + jsonData.filepath
           this.$Message.success('上传成功')
         } else {
           this.$Message.error('上传失败,请重试')
@@ -198,7 +201,7 @@
         console.log(jsonData)
         console.log('field: ' + field)
         if (jsonData.status === 10000) {
-          this.form.Logo = 'https://www.puzhengyuan.com' + jsonData.filepath
+          this.form.Logo = 'http://123.207.39.128:8080' + jsonData.filepath
           this.$Message.success('上传成功')
         } else {
           this.$Message.error('上传失败,请重试')

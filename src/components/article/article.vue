@@ -52,7 +52,7 @@
         columns: [
           {
             title: 'ID',
-            key: 'ID'
+            key: 'Id'
           },
           {
             title: '标题',
@@ -75,6 +75,10 @@
             key: 'Exhibition'
           },
           {
+            title: '是否删除',
+            key: 'Delete'
+          },
+          {
             title: '类型',
             key: 'Type'
           },
@@ -89,7 +93,7 @@
                   },
                   on: {
                     click: () => {
-                      this.$router.push({path: '/admin/main/article/detail?id=' + params.row.ID})
+                      this.$router.push({path: '/admin/main/article/detail?id=' + params.row.Id})
                     }
                   }
                 }, '详情'),
@@ -100,7 +104,7 @@
                   },
                   on: {
                     click: () => {
-                      this.$router.push({path: '/admin/main/article/save?id=' + params.row.ID})
+                      this.$router.push({path: '/admin/main/article/save?id=' + params.row.Id})
                     }
                   }
                 }, '编辑'),
@@ -111,7 +115,7 @@
                   },
                   on: {
                     click: () => {
-                      this.removeArticle(params.row.ID)
+                      this.removeArticle(params.row.Id)
                     }
                   }
                 }, '删除')

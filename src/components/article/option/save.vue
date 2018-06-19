@@ -20,6 +20,9 @@
       <FormItem label="是否展示">
         <Input v-model="form.Exhibition" placeholder="0 or 1"/>
       </FormItem>
+      <FormItem label="是否删除">
+        <Input v-model="form.Delete" placeholder="0 or 1"/>
+      </FormItem>
       <FormItem label="备注">
         <Input v-model="form.Ps" placeholder="转载自XXXX"/>
       </FormItem>
@@ -57,6 +60,7 @@
           Name: '',
           Content: '',
           Exhibition: '',
+          Delete: '',
           Ps: '',
           Type: ''
         },
@@ -88,6 +92,7 @@
               Name: res.article.Name,
               Content: res.article.Content,
               Exhibition: res.article.Exhibition,
+              Delete: res.article.Delete,
               Ps: res.article.Ps,
               Type: res.article.Type
             }
@@ -101,8 +106,9 @@
 
       submit () {
         this.form.Content = this.$refs.ueditor.getContent()
+        console.log(this.$refs.ueditor.getContent())
         console.log(this.form)
-        if (!this.form.title || !this.form.Content || !this.form.Ps || !this.form.Type || !this.form.Date || !this.form.Name || !this.form.Exhibition) {
+        if (!this.form.Title || !this.form.Content || !this.form.Ps || this.form.Type === '' || !this.form.Date || !this.form.Name || this.form.Exhibition === '' || this.form.Delete === '') {
           this.$Message.error('内容填写不完整')
           return
         }
@@ -122,6 +128,7 @@
               Name: '',
               Content: '',
               Exhibition: '',
+              Delete: '',
               Ps: '',
               Type: ''
             }

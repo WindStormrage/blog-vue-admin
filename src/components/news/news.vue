@@ -52,7 +52,7 @@
         columns: [
           {
             title: 'ID',
-            key: 'ID'
+            key: 'Id'
           },
           {
             title: '标题',
@@ -60,7 +60,7 @@
           },
           {
             title: '内容',
-            key: 'Content'
+            key: 'ContentDetail'
           },
           {
             title: '时间',
@@ -81,7 +81,7 @@
                   },
                   on: {
                     click: () => {
-                      this.$router.push({path: '/admin/main/news/detail?id=' + params.row.ID})
+                      this.$router.push({path: '/admin/main/news/detail?id=' + params.row.Id})
                     }
                   }
                 }, '详情'),
@@ -92,7 +92,7 @@
                   },
                   on: {
                     click: () => {
-                      this.$router.push({path: '/admin/main/news/save?id=' + params.row.ID})
+                      this.$router.push({path: '/admin/main/news/save?id=' + params.row.Id})
                     }
                   }
                 }, '编辑'),
@@ -103,7 +103,7 @@
                   },
                   on: {
                     click: () => {
-                      this.removeArticle(params.row.ID)
+                      this.removeArticle(params.row.Id)
                     }
                   }
                 }, '删除')
@@ -143,7 +143,7 @@
           content: '确认删除当前文章?',
           onOk: () => {
 //            this.$ShowLoading()
-            this.$http.post('/api/admin/news/delete', qs.stringify({
+            this.$http.post('/api/admin/axis/delete', qs.stringify({
               id: id
             })).then((response) => {
               let res = response.data
@@ -167,14 +167,13 @@
       },
       listArticle() {
 //        this.$ShowLoading()
-        this.$http.post('/api/admin/news/list', qs.stringify(
+        this.$http.post('/api/admin/axis/list', qs.stringify(
           this.query
         )).then((response) => {
           let res = response.data
           console.log(res)
           if (res.status === 10000) {
-            this.articles = res.news
-            console.log(res.news)
+            this.articles = res.axises
             this.query = {
               page: res.page,
               per: res.per

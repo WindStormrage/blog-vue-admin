@@ -9,8 +9,8 @@
 <template>
   <div id="detail">
     <Form :model="form" :label-width="80">
-      <FormItem label="ID:">
-        {{form.ID}}
+      <FormItem label="Id:">
+        {{form.Id}}
       </FormItem>
       <FormItem label="标题:">
         {{form.Title}}
@@ -26,6 +26,9 @@
       </FormItem>
       <FormItem label="是否展示:">
         {{form.Exhibition === 0 ? '不展示' : '展示'}}
+      </FormItem>
+      <FormItem label="是否删除:">
+        {{form.Delete === 0 ? '不删除' : '删除'}}
       </FormItem>
       <FormItem label="备注:">
         {{form.Ps}}
@@ -50,6 +53,7 @@
           Name: '',
           Content: '',
           Exhibition: '',
+          Delete: '',
           Ps: '',
           Type: ''
         },
@@ -79,6 +83,7 @@
               Name: res.article.Name,
               Content: res.article.Content,
               Exhibition: res.article.Exhibition,
+              Delete: res.article.Delete,
               Ps: res.article.Ps,
               Type: res.article.Type
             }

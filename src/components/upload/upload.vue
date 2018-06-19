@@ -26,7 +26,6 @@
       </FormItem>
     </Form>
   </div>
-
 </template>
 
 <script>
@@ -41,7 +40,7 @@
     methods: {
       handleSuccess (res) {
         if (res.status === 10000) {
-          this.form.Img = 'http://120.79.132.143:8101' + res.filepath
+          this.form.Img = 'http://123.207.39.128:8080' + res.filepath
           this.$Message.success('上传成功')
         } else {
           this.$Message.error('上传失败,请重试')
@@ -54,7 +53,7 @@
       },
       handleFormatError () {
         this.$Message.error('文件格式不正确,请上传 jpg 或 png 格式的图片')
-      },
+      }
     }
   }
 </script>

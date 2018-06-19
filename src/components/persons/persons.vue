@@ -9,7 +9,7 @@
 </style>
 <template>
   <div id="article">
-    <Table :columns="columns" :data="introductions" stripe></Table>
+    <Table :columns="columns" :data="comments" stripe></Table>
     <Button @click="$router.push({path: '/admin/main/person/save'})" type="primary" icon="plus"
             style="margin-top: 20px">添加人物
     </Button>
@@ -25,13 +25,14 @@
   import qs from 'qs'
   import psave from './option/psave.vue'
   import pdetail from './option/pdetail.vue'
+  import { toWord } from './../../utils/unicode.js'
 
   export default {
     components: {
       psave,
       pdetail
     },
-    data() {
+    data () {
       return {
         query: {
           language: '',
@@ -39,11 +40,11 @@
           per: 10
         },
         count: 0,
-        introductions: [],
+        comments: [],
         columns: [
           {
             title: 'ID',
-            key: 'ID'
+            key: 'Id'
           },
           {
             title: '名字',
@@ -55,7 +56,7 @@
           },
           {
             title: '内容',
-            key: 'Content'
+            key: 'ContentDetail'
           },
           {
             title: '删除',
@@ -72,7 +73,7 @@
                   },
                   on: {
                     click: () => {
-                      this.$router.push({path: '/admin/main/person/detail?id=' + params.row.ID})
+                      this.$router.push({path: '/admin/main/person/detail?id=' + params.row.Id})
                     }
                   }
                 }, '详情'),
@@ -83,7 +84,7 @@
                   },
                   on: {
                     click: () => {
-                      this.$router.push({path: '/admin/main/person/save?id=' + params.row.ID})
+                      this.$router.push({path: '/admin/main/person/save?id=' + params.row.Id})
                     }
                   }
                 }, '编辑'),
@@ -94,7 +95,7 @@
                   },
                   on: {
                     click: () => {
-                      this.removeArticle(params.row.ID)
+                      this.removeArticle(params.row.Id)
                     }
                   }
                 }, '删除')
@@ -104,37 +105,37 @@
         ]
       }
     },
-    mounted() {
+    mounted () {
       this.$nextTick(() => {
         this.listArticle()
       })
     },
     methods: {
-      changeLanguage(value) {
+      changeLanguage (value) {
         this.query.language = value
         this.$nextTick(() => {
           this.listArticle()
         })
       },
-      sizeChange(size) {
+      sizeChange (size) {
         this.query.per = size
         this.$nextTick(() => {
           this.listArticle()
         })
       },
-      pageChange(page) {
+      pageChange (page) {
         this.query.page = page
         this.$nextTick(() => {
           this.listArticle()
         })
       },
-      removeArticle(id) {
+      removeArticle (id) {
         this.$Modal.confirm({
           title: '提示',
           content: '确认删除当前人物描述?',
           onOk: () => {
 //            this.$ShowLoading()
-            this.$http.post('/api/admin/person/delete', qs.stringify({
+            this.$http.post('/api/admin/comment/delete', qs.stringify({
               id: id
             })).then((response) => {
               let res = response.data
@@ -156,14 +157,17 @@
           }
         })
       },
-      listArticle() {
+      listArticle () {
 //        this.$ShowLoading()
-        this.$http.post('/api/admin/person/list', qs.stringify(
+        this.$http.post('/api/admin/comment/list', qs.stringify(
           this.query
         )).then((response) => {
           let res = response.data
           if (res.status === 10000) {
-            this.introductions = res.introductions
+            this.comments = res.comments
+            for (let i = 0; i < this.comments.length; i++) {
+              this.comments[i].Name = toWord(this.comments[i].Name)
+            }
             this.query = {
               page: res.page,
               per: res.per
